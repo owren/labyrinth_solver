@@ -16,16 +16,16 @@ For the labyrinth generation, you can use e.g. the following algorithm:
 
 1. Set the size of the labyrinth and choose a random exit point.
 
-![game_logic.png](pictures/game_logic_1.png)
+![game_logic_1.PNG](pictures/game_logic_1.PNG)
 
 2. Split the labyrinth with a horizontal line in a random place with a hole (size=1 unit) in a random place.
 
-![game_logic.png](pictures/game_logic_2.png)
+![game_logic_2.PNG](pictures/game_logic_2.PNG)
 
 3. Split the labyrinth vertically in random places with holes.
 
-![game_logic.png](pictures/game_logic_3.png)
+![game_logic_3.PNG](pictures/game_logic_3.PNG)
 
 4. Recursively repeat the process for the new rectangles. If one size of the rectangle is 1 unit then stop the recursive action for that specific rectangle. Repeat the process until all rectangles have a one unit size.
 
-![game_logic.png](pictures/game_logic_4.png)
+![game_logic_4.PNG](pictures/game_logic_4.PNG)
