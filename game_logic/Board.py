@@ -1,6 +1,7 @@
 import numpy as np
 import random
 
+wall = '#'
 
 class Board:
 
@@ -12,12 +13,12 @@ class Board:
 
     def set_boarder(self):
         # sets boarder around
-        for y in range(self.board.shape[0]):
-            for x in range(self.board.shape[1]):
-                if y == 0 or y == self.board.shape[0] - 1:
-                    self.board[y][x] = '#'
-                if x == 0 or x == self.board.shape[1] - 1:
-                    self.board[y][x] = '#'
+        for row in range(self.board.shape[0]):
+            self.board[row][0] = wall
+            self.board[row][self.board.shape[1] - 1] = wall
+        for col in range(self.board.shape[0]):
+            self.board[0][col] = wall
+            self.board[self.board.shape[0] - 1][col] = wall
 
     def set_exit_point(self):
         direction = random.randint(1, 4)
@@ -31,6 +32,14 @@ class Board:
             self.board[0][x_coordinate] = ' '
         else:
             self.board[self.board.shape[0] - 1][x_coordinate] = ' '
+
+    def decide_orientation(self, width, height):
+        if width < height:
+            return 'horizontal'
+        elif width > height:
+            return 'vertical'
+        else:
+            return 'horizontal' if random.randint(0, 1) == 0 else 'vertical'
 
     def display_board(self):
         for row in self.board:
