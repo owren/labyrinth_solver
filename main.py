@@ -8,9 +8,11 @@ from robust_IO import input_int
 
 
 def main():
-
-    a = Board(11, 7)
-    #a.display_board()
+    from datetime import datetime
+    startTime = datetime.now()
+    a = Board(21, 21)
+    print(datetime.now() - startTime)
+    a.display_board()
 
 if __name__ == "__main__":
     main()

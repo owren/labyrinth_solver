@@ -7,22 +7,24 @@ import random
 import os
 import time
 
+from Types import Orientation
+
 VER, HOR = 0, 1
 
 def decide_orientation(width, height):
     if width < height:
-        return HOR
+        return Orientation.HORIZONTAL
     elif width > height:
-        return VER
+        return Orientation.VERTICAL
     else:
-        return HOR if random.randint(0, 1) == 0 else VER
+        return Orientation.HORIZONTAL if random.randint(0, 1) == 0 else Orientation.VERTICAL
 
 
 def clear_screen():
     """
     Clears the terminal screen for the game to be prettier
     """
-    wait(.5)
+    #wait(.01)
     os.system('cls' if os.name == 'nt' else 'clear')
 
 
@@ -32,11 +34,11 @@ def wait(x):
 
 def random_even_number(min, max):
     while True:
-        line = random.randint(min + 1, max)
+        line = random.randint(min + 1, max - 1)
         if line % 2 == 0:
-            break
-        else: continue
-    return line
+            return line
+        else:
+            continue
 
 
 def random_odd_number(min, max):
@@ -44,11 +46,5 @@ def random_odd_number(min, max):
         line = random.randint(min, max)
         if line % 2 == 0:
             continue
-        else: break
-    return line
-
-
-def print_orientation(ori):
-    if ori == VER:
-        print('ver')
-    else: print('hor')
+        else:
+            return line
