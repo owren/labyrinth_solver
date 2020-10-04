@@ -70,7 +70,7 @@ class Board:
             min_wall - int, the x or y coordinate for the starting point for the wall
             max_wall - int, the x or y coordinate for the ending point for the wall
             orientation - Enum, for what direction the wall should be, vertical or horizontal
-            coordinate - int, the x or y coordinate (oposite of min and max) for where the wall should be
+            coordinate - int, the x or y coordinate (opposite of min and max) for where the wall should be
         """
         opening = random_odd_number(min_wall, max_wall)
         if orientation == Orientation.VERTICAL:
@@ -100,6 +100,7 @@ class Board:
         """
         if x1 - x0 <= 3 or y1 - y0 <= 3:
             return
+        self.display_board()
         orientation = decide_orientation(x1 - x0, y1 - y0)
         if orientation == Orientation.VERTICAL:
             line = random_even_number(x0, x1)
@@ -114,6 +115,7 @@ class Board:
             self.recursive_divide(x0, x1, line, y1)
 
     def display_board(self):
+        input('')
         clear_screen()
         for row in self.board:
             string = ''
