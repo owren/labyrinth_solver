@@ -12,6 +12,7 @@ from functions import *
 WALL = '#'
 EMPTY = ' '
 
+
 class Board:
 
     def __init__(self, vertical, horizontal):
@@ -84,7 +85,7 @@ class Board:
 
     def display_board(self):
         #input('')
-        clear_screen()
+        #clear_screen()
         for y in range(self.board.shape[0]):
             s1 = WALL + EMPTY
             s2 = ''
