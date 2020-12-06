@@ -54,6 +54,7 @@ class Board:
         #self.display_board()
 
     def recursive_divide(self, y, x):
+        self.display_board()
         if y[1] - y[0] < 2 or x[1] - x[0] < 2:
             return
         orientation = decide_orientation(x[1] - x[0], y[1] - y[0])
@@ -85,7 +86,7 @@ class Board:
 
     def display_board(self):
         #input('')
-        #clear_screen()
+        clear_screen()
         for y in range(self.board.shape[0]):
             s1 = WALL + EMPTY
             s2 = ''
@@ -119,4 +120,3 @@ class Board:
                 s3 += EMPTY + EMPTY
             s3 += WALL + EMPTY
         print(s3)
-
