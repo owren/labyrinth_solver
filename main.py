@@ -36,7 +36,7 @@ def main():
     #x_coordinate = int(input('X-coordinate for starting point: '))
     from datetime import datetime
     startTime = datetime.now()
-    a = Board(vertical=50, horizontal=50)
+    a = Board(vertical=15, horizontal=15)
     print(datetime.now() - startTime)
     a.display_board()
 
