@@ -11,3 +11,9 @@ class Direction(Enum):
     SOUTH = 1
     WEST = 2
     EAST = 3
+
+
+class Path(Enum):
+    NO = 0
+    YES = 1
+    WAS = 2

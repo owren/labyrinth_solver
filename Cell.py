@@ -7,6 +7,7 @@ import random
 
 from Types import *
 
+
 class Cell:
 
     def __init__(self, y_coordinate, x_coordinate):
@@ -19,7 +20,7 @@ class Cell:
         self.y_coordinate = y_coordinate
         self.x_coordinate = x_coordinate
         # Part of search? - 0 if not, 1 - if is, 2 - if was
-        self.path = 0
+        self.path = Path.NO
 
     def update_wall(self, direction, wall):
         """Updates the wall for the Cell object in given direction, if there should be a wall there or not
