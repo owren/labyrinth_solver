@@ -17,73 +17,43 @@ EMPTY = ' '
 
 class Board:
 
-    def __init__(self, vertical, horizontal, surface, size):
-        self.board_height = size[0]
-        self.board_width = size[1]
-        self.cell_size = self.board_width / vertical
-        self.board = self.__set_board(vertical, horizontal)
-        self.__set_boarder(surface)
-        #pygame.display.update()
-        #pygame.time.wait(2000)
+    def __init__(self, vertical, horizontal, size):
+        self.__board_height = size[0]
+        self.__board_width = size[1]
+        self.__cell_size = self.__board_width / vertical
+        self.__set_board(vertical, horizontal)
+        self.__set_boarder()
         self.__set_opening()
-        #pygame.display.update()
-        #pygame.time.wait(2000)
-        self.__recursive_divide(y=[0, self.board.shape[0]], x=[0, self.board.shape[1]])
+        self.__recursive_divide(y=[0, self.__board.shape[0]], x=[0, self.__board.shape[1]])
 
     def __set_board(self, vertical, horizontal):
         # defines the board
-        self.board = np.ndarray((vertical, horizontal), dtype=np.object)
+        self.__board = np.ndarray((vertical, horizontal), dtype=np.object)
         # creates the cells from Cell class
-        for y in range(self.board.shape[0]):
-            for x in range(self.board.shape[1]):
-                self.board[y][x] = Cell(y, x)
-        return self.board
+        for y in range(self.__board.shape[0]):
+            for x in range(self.__board.shape[1]):
+                self.__board[y][x] = Cell(y, x)
 
-    def __set_boarder(self, surface):
-        #print(self.board.shape)
-        for y in range(self.board.shape[0]):
-            #
-            self.board[y][0].update_wall(Direction.WEST, True)
-            self.board[y][self.board.shape[1] - 1].update_wall(Direction.EAST, True)
-
-        for x in range(self.board.shape[1]):
-            self.board[0][x].update_wall(Direction.NORTH, True)
-            self.board[self.board.shape[0] - 1][x].update_wall(Direction.SOUTH, True)
-        """
-        # TOP
-        pygame.draw.line(surface, BLACK,
-                         (0, 0),
-                         (self.cell_size * self.board.shape[0], 0), 4)
-
-        # Bottom
-        pygame.draw.line(surface, BLACK,
-                         (0, self.cell_size * self.board.shape[0]),
-                         (self.cell_size * self.board.shape[1], self.cell_size * self.board.shape[0]), 4)
-        
-        # Left
-        pygame.draw.line(surface, BLACK,
-                         (0 + PADDING, 0 + PADDING),
-                         (0 + PADDING, HEIGHT - PADDING), 2)
-        # Right
-        pygame.draw.line(surface, BLACK,
-                         (WIDTH - PADDING, 0 + PADDING),
-                         (WIDTH - PADDING, HEIGHT - PADDING), 2)
-        """
+    def __set_boarder(self):
+        for y in range(self.__board.shape[0]):
+            self.__board[y][0].update_wall(Direction.WEST, True)
+            self.__board[y][self.__board.shape[1] - 1].update_wall(Direction.EAST, True)
+        for x in range(self.__board.shape[1]):
+            self.__board[0][x].update_wall(Direction.NORTH, True)
+            self.__board[self.__board.shape[0] - 1][x].update_wall(Direction.SOUTH, True)
 
     def __set_opening(self):
-        #self.display_board()
         direction = Direction(random.randint(0, 3))
-        y_coordinate = random.randint(0, self.board.shape[0] - 1)
-        x_coordinate = random.randint(0, self.board.shape[1] - 1)
+        y_coordinate = random.randint(0, self.__board.shape[0] - 1)
+        x_coordinate = random.randint(0, self.__board.shape[1] - 1)
         if direction == Direction.NORTH:
-            self.board[0][x_coordinate].update_wall(direction, False)
+            self.__board[0][x_coordinate].update_wall(direction, False)
         elif direction == Direction.SOUTH:
-            self.board[self.board.shape[0] - 1][x_coordinate].update_wall(direction, False)
+            self.__board[self.__board.shape[0] - 1][x_coordinate].update_wall(direction, False)
         elif direction == Direction.WEST:
-            self.board[y_coordinate][0].update_wall(direction, False)
+            self.__board[y_coordinate][0].update_wall(direction, False)
         elif direction == Direction.EAST:
-            self.board[y_coordinate][self.board.shape[1] - 1].update_wall(direction, False)
-        #self.display_board()
+            self.__board[y_coordinate][self.__board.shape[1] - 1].update_wall(direction, False)
 
     def __recursive_divide(self, y, x):
         #self.display_board()
@@ -105,48 +75,50 @@ class Board:
         opening = random.randint(size[0], size[1] - 1)
         if orientation == Orientation.VERTICAL:
             for cell in range(size[0], size[1]):
-                self.board[cell][coordinate].update_wall(Direction.EAST, True)
-                self.board[cell][coordinate + 1].update_wall(Direction.WEST, True)
-            self.board[opening][coordinate].update_wall(Direction.EAST, False)
-            self.board[opening][coordinate + 1].update_wall(Direction.WEST, False)
+                self.__board[cell][coordinate].update_wall(Direction.EAST, True)
+                self.__board[cell][coordinate + 1].update_wall(Direction.WEST, True)
+            self.__board[opening][coordinate].update_wall(Direction.EAST, False)
+            self.__board[opening][coordinate + 1].update_wall(Direction.WEST, False)
         else:
             for cell in range(size[0], size[1]):
-                self.board[coordinate][cell].update_wall(Direction.SOUTH, True)
-                self.board[coordinate + 1][cell].update_wall(Direction.NORTH, True)
-            self.board[coordinate][opening].update_wall(Direction.SOUTH, False)
-            self.board[coordinate + 1][opening].update_wall(Direction.NORTH, False)
+                self.__board[coordinate][cell].update_wall(Direction.SOUTH, True)
+                self.__board[coordinate + 1][cell].update_wall(Direction.NORTH, True)
+            self.__board[coordinate][opening].update_wall(Direction.SOUTH, False)
+            self.__board[coordinate + 1][opening].update_wall(Direction.NORTH, False)
+
+    def get_board(self):
+        return self.__board
 
     def display_board(self):
-        #input('')
         clear_screen()
-        for y in range(self.board.shape[0]):
+        for y in range(self.__board.shape[0]):
             s1 = WALL + EMPTY
             s2 = ''
-            for x in range(self.board.shape[1]):
+            for x in range(self.__board.shape[1]):
                 # north
-                if self.board[y][x].get_wall(Direction.NORTH):
+                if self.__board[y][x].get_wall(Direction.NORTH):
                     s1 += WALL + EMPTY
                 else:
                     s1 += EMPTY + EMPTY
                 s1 += WALL + EMPTY
 
                 # west
-                if self.board[y][x].get_wall(Direction.WEST):
+                if self.__board[y][x].get_wall(Direction.WEST):
                     s2 += WALL + EMPTY
                 else:
                     s2 += EMPTY + EMPTY
                 s2 += EMPTY + EMPTY
 
                 # east
-                if x == self.board.shape[1] - 1 and self.board[y][x].get_wall(Direction.EAST):
+                if x == self.__board.shape[1] - 1 and self.__board[y][x].get_wall(Direction.EAST):
                     s2 += WALL + EMPTY
 
             print(s1)
             print(s2)
         # south
         s3 = WALL + EMPTY
-        for x in range(self.board.shape[1]):
-            if self.board[self.board.shape[0] - 1][x].get_wall(Direction.SOUTH):
+        for x in range(self.__board.shape[1]):
+            if self.__board[self.__board.shape[0] - 1][x].get_wall(Direction.SOUTH):
                 s3 += WALL + EMPTY
             else:
                 s3 += EMPTY + EMPTY
