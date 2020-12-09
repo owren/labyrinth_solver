@@ -8,6 +8,7 @@ from robust_IO import input_int
 from Constants import *
 import visualization
 from MazeSolver import MazeSolver
+from functions import recursionlimit
 
 import pygame
 
@@ -18,8 +19,8 @@ def main():
     #y_coordinate = int(input('Y-coordinate for starting point: '))
     #x_coordinate = int(input('X-coordinate for starting point: '))
     x_coordinate = y_coordinate = 10
-    rows = 15
-    columns = 20
+    rows = 20
+    columns = 30
 
     height = V_SIZE
     width = int((height / rows) * columns)
@@ -41,7 +42,11 @@ def main():
     visualization.draw_maze(maze.get_board(), cell_size, surface)
 
     solver = MazeSolver(maze.get_board(), cell_size, [y_coordinate, x_coordinate], surface)
-    stack = solver.recursive_backtracking(y_coordinate, x_coordinate, surface)
+    with recursionlimit(10000):
+        solver.recursive_backtracking(y_coordinate, x_coordinate, surface)
+    #for i, j in enumerate(stack):
+    #    print(i, j)
+    stack = solver.get_stack()
 
     visualization.run_loop()
 
