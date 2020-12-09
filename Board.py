@@ -40,7 +40,7 @@ class Board:
         return self.board
 
     def __set_boarder(self, surface):
-        print(self.board.shape)
+        #print(self.board.shape)
         for y in range(self.board.shape[0]):
             #
             self.board[y][0].update_wall(Direction.WEST, True)

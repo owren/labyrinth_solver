@@ -38,25 +38,21 @@ def main():
     #horizontal = int(input('Horizontal size: '))
     #y_coordinate = int(input('Y-coordinate for starting point: '))
     #x_coordinate = int(input('X-coordinate for starting point: '))
-    v = 15
-    h = 10
+    rows = 60
+    columns = 120
     from datetime import datetime
-    #https://medium.com/better-programming/making-grids-in-python-7cf62c95f413
     height = SIZE
-    width = int((height / v) * h)
-    cell_size = height / v
-    print(height, width)
+    width = int((height / rows) * columns)
+    cell_size = height / rows
     pygame.init()
-    _VARS = {'surf': False}
-    #_VARS['surf']
     surface = pygame.display.set_mode((width + (PADDING * 2), height + (PADDING * 2)))#((WIDTH + (PADDING * 2), HEIGHT + (PADDING * 2)))
     pygame.display.set_caption('Maze Solver')
     surface.fill(GREY)
-    a = Board(vertical=v, horizontal=h, surface=surface, size=[height, width])
+    a = Board(vertical=rows, horizontal=columns, surface=surface, size=[height, width])
+    #a.display_board()
     draw_maze(a.board, cell_size, surface)
     while True:
         check_events()
-        # drawLine()
         pygame.display.update()
 
     
@@ -83,25 +79,27 @@ def draw_maze(board, cell_size, surface):
             x_0 = x * cell_size + PADDING
             x_1 = (x + 1) * cell_size + PADDING
             if board[y][x].get_wall(Direction.NORTH):
-                draw_line(surface, y_0, x_0, y_1, x_0)
+                draw_line(surface, x_0, y_0, x_1, y_0)
                 # draw line
                 pass
             if board[y][x].get_wall(Direction.EAST):
-                #draw_line(surface, y_0, x_1, y_1, x_1)
+                draw_line(surface, x_1, y_0, x_1, y_1)
                 # draw line
                 pass
             if board[y][x].get_wall(Direction.SOUTH):
-                #draw_line(surface, y_1, x_0, y_1, x_1)
+                draw_line(surface, x_0, y_1, x_1, y_1)
                 # draw line
                 pass
             if board[y][x].get_wall(Direction.WEST):
-                #draw_line(surface, y_0, x_0, )
+                draw_line(surface, x_0, y_0, x_0, y_1)
                 # draw line
                 pass
+        #if y == 1:
+        #    break
 
 
-def draw_line(surface, y_0, x_0, y_1, x_1):
-    pygame.draw.line(surface, BLACK, (y_0, x_0), (y_1, x_1), 1)
+def draw_line(surface, x_0, y_0, x_1, y_1):
+    pygame.draw.line(surface, BLACK, (int(x_0), int(y_0)), (int(x_1), int(y_1)), 1)
 
 
 if __name__ == "__main__":
