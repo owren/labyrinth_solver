@@ -60,3 +60,8 @@ class Cell:
 
     def get_used(self):
         return self.path
+
+    def set_used(self, path):
+        # path: Path-NO, Path.YES, Path.WAS
+        self.path = path
+

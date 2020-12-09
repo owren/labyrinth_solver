@@ -9,10 +9,6 @@ from Cell import *
 from Types import *
 from functions import *
 from Constants import *
-import pygame
-
-WALL = '#'
-EMPTY = ' '
 
 
 class Board:

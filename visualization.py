@@ -4,23 +4,6 @@ from pygame.locals import KEYDOWN, K_q
 
 from Types import *
 from Constants import *
-from Board import Board
-
-
-def start_pygame(rows, columns, x_coordinate, y_coordinate):
-    height = SIZE
-    width = int((height / rows) * columns)
-    cell_size = height / rows
-    pygame.init()
-    surface = pygame.display.set_mode(
-        (width + (PADDING * 2), height + (PADDING * 2)))  # ((WIDTH + (PADDING * 2), HEIGHT + (PADDING * 2)))
-    pygame.display.set_caption('Maze Solver')
-    surface.fill(GREY)
-    maze = Board(vertical=rows, horizontal=columns, size=[height, width])
-    # a.display_board()
-    draw_maze(maze.get_board(), cell_size, surface)
-    pygame.display.update()
-    run_loop()
 
 
 def run_loop():
@@ -34,6 +17,7 @@ def run_loop():
 
 
 def draw_maze(board, cell_size, surface):
+    surface.fill(GREY)
     for y in range(board.shape[0]):
         for x in range(board.shape[1]):
             y_0 = y * cell_size + PADDING
@@ -48,7 +32,15 @@ def draw_maze(board, cell_size, surface):
                 draw_line(surface, x_0, y_1, x_1, y_1)
             if board[y][x].get_wall(Direction.WEST):
                 draw_line(surface, x_0, y_0, x_0, y_1)
+    pygame.display.update()
 
 
 def draw_line(surface, x_0, y_0, x_1, y_1):
     pygame.draw.line(surface, BLACK, (int(x_0), int(y_0)), (int(x_1), int(y_1)), 1)
+
+
+def draw_rect(surface, colour, x_0, y_0, x_1, y_1, cell_size):
+    rectangle = pygame.Rect(x_0 + 1 + (cell_size/4), y_0 + 1 + (cell_size/4), cell_size/2, cell_size/2)
+    pygame.draw.rect(surface, colour, rectangle)
+    pygame.display.update()
+    pygame.time.wait(50)
