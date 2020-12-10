@@ -3,6 +3,7 @@ from Types import *
 from Constants import *
 from visualization import draw_rect
 
+
 class MazeSolver:
     # depth search
     def __init__(self, maze, cell_size, starting_position, surface):
@@ -13,13 +14,60 @@ class MazeSolver:
         self.__maze = maze
         self.__cell_size = cell_size
         self.__solved = False
-        #self.__current_y_position = starting_position[0]
-        #self.__current_x_position = starting_position[1]
-        #self.surface = surface
-        #while True:
-        #    self.check_next(self.__current_y_position, self.__current_x_position, self.surface)
-        #    pass
-            # solve
+
+    def depth_first_search(self, y_coordinate, x_coordinate, surface):
+        current_y = y_coordinate
+        current_x = x_coordinate
+        while not self.__solved:
+
+            if [current_y, current_x] not in self.__stack:
+                self.add_to_stack_and_visualize(current_y, current_x, surface)
+            cell = self.__maze[current_y, current_x]
+
+            if not cell.get_wall(Direction.NORTH) and not self.__solved:
+                if current_y - 1 < 0:
+                    self.__solved = True
+                    break
+                next_cell = self.__maze[current_y - 1, current_x]
+                if next_cell.get_used() == Path.NO:
+                    current_y = current_y - 1
+                    current_x = current_x
+                    continue
+
+            if not cell.get_wall(Direction.EAST) and not self.__solved:
+                if current_x + 1 > self.__maze.shape[1] - 1:
+                    self.__solved = True
+                    break
+                next_cell = self.__maze[current_y, current_x + 1]
+                if next_cell.get_used() == Path.NO:
+                    current_y = current_y
+                    current_x = current_x + 1
+                    continue
+
+            if not cell.get_wall(Direction.SOUTH) and not self.__solved:
+                if current_y + 1 > self.__maze.shape[0] - 1:
+                    self.__solved = True
+                    break
+                next_cell = self.__maze[current_y + 1, current_x]
+                if next_cell.get_used() == Path.NO:
+                    current_y = current_y + 1
+                    current_x = current_x
+                    continue
+
+            if not cell.get_wall(Direction.WEST) and not self.__solved:
+                if current_x - 1 < 0:
+                    self.__solved = True
+                    break
+                next_cell = self.__maze[current_y, current_x - 1]
+                if next_cell.get_used() == Path.NO:
+                    current_y = current_y
+                    current_x = current_x - 1
+                    continue
+
+            if not self.__solved:
+                self.pop_off_stack_and_visualize(current_y, current_x, surface)
+                current_y = self.__stack[-1][0]
+                current_x = self.__stack[-1][1]
 
     def recursive_backtracking(self, current_y, current_x, surface):
         self.add_to_stack_and_visualize(current_y, current_x, surface)

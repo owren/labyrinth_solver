@@ -9,6 +9,7 @@ from Constants import *
 import visualization
 from MazeSolver import MazeSolver
 from functions import recursionlimit
+import sys
 
 import pygame
 
@@ -18,13 +19,14 @@ def main():
     #columns = int(input('Horizontal size: '))
     #y_coordinate = int(input('Y-coordinate for starting point: '))
     #x_coordinate = int(input('X-coordinate for starting point: '))
-    x_coordinate = y_coordinate = 10
-    rows = 20
-    columns = 30
+    rows = 500
+    columns = 1000
+    x_coordinate = int(columns / 2)
+    y_coordinate = int(rows / 2)
 
-    height = V_SIZE
+    height = int(V_SIZE)
     width = int((height / rows) * columns)
-    cell_size = height / rows
+    cell_size = int(height / rows)
 
     pygame.init()
     surface = pygame.display.set_mode((width + (PADDING * 2), height + (PADDING * 2)))
@@ -42,12 +44,14 @@ def main():
     visualization.draw_maze(maze.get_board(), cell_size, surface)
 
     solver = MazeSolver(maze.get_board(), cell_size, [y_coordinate, x_coordinate], surface)
-    with recursionlimit(10000):
-        solver.recursive_backtracking(y_coordinate, x_coordinate, surface)
+
+    #with recursionlimit(5000):
+    #    solver.recursive_backtracking(y_coordinate, x_coordinate, surface)
+    solver.depth_first_search(y_coordinate, x_coordinate, surface)
     #for i, j in enumerate(stack):
     #    print(i, j)
     stack = solver.get_stack()
-
+    pygame.display.update()
     visualization.run_loop()
 
 
