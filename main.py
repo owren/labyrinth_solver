@@ -12,15 +12,55 @@ from functions import recursionlimit
 import sys
 
 import pygame
+import tkinter as tk
 
 
 def main():
+    """
+    r = tk.Tk()
+    r.title('Maze Solver setup')
+    #button = tk.Button(r, text='Stop', width=25, command=r.destroy)
+    #button.pack()
+    tk.Label(r, text='No of vertical cells').grid(row=0)
+    vertical = tk.IntVar()
+    e1 = tk.Entry(r, textvariable=vertical, justify=tk.RIGHT)
+    e1.grid(row=0, column=1)
+
+    tk.Label(r, text='No of horizontal cells').grid(row=1)
+    horizontal = tk.IntVar()
+    e2 = tk.Entry(r, textvariable=horizontal, justify=tk.RIGHT)
+    e2.grid(row=1, column=1)
+
+    tk.Label(r, text='Y coordinate start').grid(row=2)
+    y_start = tk.IntVar()
+    e3 = tk.Entry(r, textvariable=y_start, justify=tk.RIGHT)
+    e3.grid(row=2, column=1)
+
+    tk.Label(r, text='X coordinate start').grid(row=3)
+    x_start = tk.IntVar()
+    e4 = tk.Entry(r, textvariable=y_start, justify=tk.RIGHT)
+    e4.grid(row=3, column=1)
+
+    tk.Label(r, text='Fast solver').grid(row=4)
+    fast = tk.BooleanVar()
+    c1 = tk.Checkbutton(r, text="Music", variable=fast)
+    c1.grid(row=4, column=1)
+
+    #CheckVar1 = tk.IntVar()
+    #C1 = tk.Checkbutton(r, text="Music", variable=CheckVar1).grid(row=2)
+
+
+    r.mainloop()
+    #print(vertical.get())
+    #print(CheckVar1.get())
+
+    """
     #rows = int(input('Vertical size: '))
     #columns = int(input('Horizontal size: '))
     #y_coordinate = int(input('Y-coordinate for starting point: '))
     #x_coordinate = int(input('X-coordinate for starting point: '))
-    rows = 500
-    columns = 1000
+    rows = 50
+    columns = 100
     x_coordinate = int(columns / 2)
     y_coordinate = int(rows / 2)
 
