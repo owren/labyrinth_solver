@@ -8,7 +8,7 @@
 ################################################################################
 
 
-def input_int(text, min=0, max=999999):
+def input_int(text, minimum=0, maximum=999999):
     """
     Make sure an integer input is actually an integer
     """
@@ -19,9 +19,8 @@ def input_int(text, min=0, max=999999):
             print('Input should be an integer, try again! \n')
             continue
         else:
-            if inp in range (min, max + 1):
+            if inp in range(minimum, maximum + 1):
                 return inp
             else:
-                print('Input has to be between', min, 'and', max, '\n')
+                print('Input has to be between', minimum, 'and', maximum, '\n')
                 continue
-    return inp
