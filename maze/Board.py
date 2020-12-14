@@ -5,8 +5,9 @@
 
 import numpy as np
 
-from Cell import *
-from Types import *
+from maze.Cell import Cell
+from values.Direction import Direction
+from values.Orientation import Orientation
 from functions import *
 from Constants import *
 
@@ -52,7 +53,6 @@ class Board:
             self.__board[y_coordinate][self.__board.shape[1] - 1].update_wall(direction, False)
 
     def __recursive_divide(self, y, x):
-        #self.display_board()
         if y[1] - y[0] < 2 or x[1] - x[0] < 2:
             return
         orientation = decide_orientation(x[1] - x[0], y[1] - y[0])

@@ -3,7 +3,7 @@
 # Student nummer: 333704                                                       #
 ################################################################################
 
-from Board import Board
+from maze.Board import Board
 from robust_IO import input_int
 import Constants
 import visualization
