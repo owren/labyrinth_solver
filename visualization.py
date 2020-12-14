@@ -17,7 +17,7 @@ def run_loop():
 
 
 def draw_maze(board, cell_size, surface):
-    surface.fill(GREY)
+    surface.fill(BLACK)
     for y in range(board.shape[0]):
         for x in range(board.shape[1]):
             y_0 = y * cell_size + PADDING
@@ -36,7 +36,7 @@ def draw_maze(board, cell_size, surface):
 
 
 def draw_line(surface, x_0, y_0, x_1, y_1):
-    pygame.draw.line(surface, BLACK, (int(x_0), int(y_0)), (int(x_1), int(y_1)), 1)
+    pygame.draw.line(surface, GREY, (int(x_0), int(y_0)), (int(x_1), int(y_1)), 1)
 
 
 def draw_rect(surface, colour, x_0, y_0, x_1, y_1, cell_size):
