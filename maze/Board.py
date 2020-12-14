@@ -7,9 +7,8 @@ import numpy as np
 
 from maze.Cell import Cell
 from values.Direction import Direction
-from values.Orientation import Orientation
-from functions import *
-from Constants import *
+from utils.functions import *
+from values.Constants import *
 
 
 class Board:

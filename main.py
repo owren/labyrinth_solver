@@ -4,8 +4,8 @@
 ################################################################################
 
 from maze.Board import Board
-from robust_IO import input_int
-import Constants
+from utils.robust_IO import input_int
+from values import Constants
 import visualization
 from MazeSolver import MazeSolver
 

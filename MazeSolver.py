@@ -1,7 +1,7 @@
 
 from values.Direction import Direction
 from values.Path import Path
-from Constants import *
+from values.Constants import *
 from visualization import draw_rect
 
 

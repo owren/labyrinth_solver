@@ -3,7 +3,7 @@ import sys
 from pygame.locals import KEYDOWN, K_q
 
 from values.Direction import Direction
-from Constants import *
+from values.Constants import *
 
 
 def run_loop():
