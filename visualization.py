@@ -2,7 +2,7 @@ import pygame
 import sys
 from pygame.locals import KEYDOWN, K_q
 
-from Types import *
+from values.Direction import Direction
 from Constants import *
 
 

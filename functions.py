@@ -7,7 +7,7 @@ import random
 import os
 import time
 
-from Types import Orientation
+from values.Orientation import Orientation
 
 
 def decide_orientation(width, height):

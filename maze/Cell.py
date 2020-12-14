@@ -3,9 +3,8 @@
 # Student nummer: 333704                                                       #
 ################################################################################
 
-import random
-
-from Types import *
+from values.Direction import Direction
+from values.Path import Path
 
 
 class Cell:
