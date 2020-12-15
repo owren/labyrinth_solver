@@ -4,9 +4,6 @@ from values.Direction import Direction
 from values.Constants import *
 
 
-
-
-
 def draw_maze(board, cell_size, surface):
     surface.fill(BLACK)
     for y in range(board.shape[0]):

@@ -3,14 +3,7 @@
 # Student nummer: 333704                                                       #
 ################################################################################
 
-from maze.Board import Board
-from utils.robust_IO import input_int
-from values import Constants
-import visualization
-from MazeSolver import MazeSolver
 from UserInterface import UserInterface
-
-import pygame
 
 
 def main():

@@ -13,7 +13,11 @@ V_MAX = 1000
 PADDING = 10
 NO_OF_V_CELLS = int(V_MAX / 2)
 
-# tkinter size
+# pygame start
+ROWS = 20
+COLUMNS = 30
+Y_START = 10
+X_START = 15
 
 
 WALL = '#'
