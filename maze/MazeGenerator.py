@@ -1,9 +1,7 @@
 import random
 import pygame
 
-import visualization
-from maze.Board import Board
-from utils import functions
+from utils import functions, visualization
 from values import Constants
 from values.Direction import Direction
 from values.Orientation import Orientation
@@ -20,13 +18,17 @@ class MazeGenerator:
         pygame.init()
         self.__surface = pygame.display.set_mode((width + (Constants.PADDING * 2), height + (Constants.PADDING * 2)))
         pygame.display.set_caption('Maze Solver')
-        self.__surface.fill(Constants.GREY)
+        if not self.__animation:
+            self.__surface.fill(Constants.GREY)
+            text_surface = pygame.font.SysFont('calibri', 30).render('Generating maze and solving maze, please wait...', False, Constants.BLACK)
+            self.__surface.blit(text_surface, (10, 10))
+            pygame.display.update()
         self.__set_boarder()
         self.__set_opening()
         if self.__animation:
             visualization.draw_maze(self.__board, self.__cell_size, self.__surface)
         self.__recursive_divide(y=[0, self.__board.shape[0]], x=[0, self.__board.shape[1]])
-
+        visualization.draw_maze(self.__board, self.__cell_size, self.__surface)
         return self.__surface
 
     def __set_boarder(self):

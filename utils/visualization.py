@@ -29,7 +29,4 @@ def draw_line(surface, x_0, y_0, x_1, y_1):
 
 def draw_rect(surface, colour, x_0, y_0, x_1, y_1, cell_size):
     rectangle = pygame.Rect(x_0 + 1 + (cell_size/4), y_0 + 1 + (cell_size/4), cell_size/2, cell_size/2)
-    #rectangle = pygame.Rect(x_0 + 1, y_0 + 1, cell_size, cell_size)
     pygame.draw.rect(surface, colour, rectangle)
-    #pygame.display.update()
-    #pygame.time.wait(50)

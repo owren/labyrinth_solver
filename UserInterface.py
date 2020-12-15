@@ -16,6 +16,7 @@ class UserInterface:
         self.__columns = Constants.COLUMNS
         self.__y_coordinate = Constants.Y_START
         self.__x_coordinate = Constants.X_START
+        self.__animation = True
         self.root = self.__initiate_ui()
         self.__surface = self.__initiate_pygame()
 
@@ -36,7 +37,7 @@ class UserInterface:
 
     def __initiate_ui(self):
         root = tk.Tk()
-        root.title('Maze Solver Options')
+        root.title('Maze Solver')
         self.__ui_inputs(root)
         return root
 
@@ -76,6 +77,7 @@ class UserInterface:
 
         tk.Label(root, text="Show Animation").grid(row=7, column=1)
         self.__show_animation = tk.BooleanVar()
+        self.__show_animation.set(True)
         self.__animation_check = tk.Checkbutton(root, variable=self.__show_animation, command=self.__show_animation_callback).grid(row=7, column=3)
 
         tk.Label(root).grid(row=8, column=1)
@@ -106,7 +108,7 @@ class UserInterface:
         self.__x_coordinate = int(value)
 
     def __show_animation_callback(self):
-        self.__show_animation_ = self.__show_animation.get()
+        self.__animation = self.__show_animation.get()
 
     def __start_game(self):
         cell_size = int(Constants.V_MAX / self.__rows)
@@ -114,31 +116,9 @@ class UserInterface:
         width = cell_size * self.__columns
         board = Board(self.__rows, self.__columns, height, width, cell_size)
 
-        generator = MazeGenerator(board.get_board(), cell_size, animation=True)
+        generator = MazeGenerator(board.get_board(), cell_size, animation=self.__animation)
         surface = generator.generate(height=height, width=width)
 
-        solver = MazeSolver(board.get_board(), cell_size)
+        solver = MazeSolver(board.get_board(), cell_size, animation=self.__animation)
         solver.depth_first_search(self.__y_coordinate, self.__x_coordinate, surface)
         pygame.display.update()
-        """
-        pygame.init()
-        surface = pygame.display.set_mode((width + (Constants.PADDING * 2), height + (Constants.PADDING * 2)))
-        pygame.display.set_caption('Maze Solver')
-        surface.fill(Constants.GREY)
-
-        text_surface = pygame.font.SysFont('calibri', 30).render('Generating maze, please wait...', False, Constants.BLACK)
-        surface.blit(text_surface, (10, 10))
-        pygame.display.update()
-        maze = Board(vertical=self.__rows, horizontal=self.__columns, size=[height, width], cell_size=cell_size)
-
-        visualization.draw_maze(maze.get_board(), cell_size, surface)
-
-        solver = MazeSolver(maze.get_board(), cell_size, [self.__y_coordinate, self.__x_coordinate], surface)
-
-        solver.depth_first_search(self.__y_coordinate, self.__x_coordinate, surface)
-
-        stack = solver.get_stack()
-        pygame.display.update()
-        #visualization.run_loop()
-        """
-

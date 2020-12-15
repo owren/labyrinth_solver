@@ -1,19 +1,22 @@
+import time
+import pygame
 
 from values.Direction import Direction
 from values.Path import Path
-from values.Constants import *
-from visualization import draw_rect
+from values import Constants
+from utils.visualization import draw_rect
 
 
 class MazeSolver:
     # depth search
-    def __init__(self, maze, cell_size):
+    def __init__(self, maze, cell_size, animation):
         """
         :param starting_position: list of y- and x-coordinate for starting position
         """
         self.__stack = []
         self.__maze = maze
         self.__cell_size = cell_size
+        self.__animation = animation
         self.__solved = False
 
     def depth_first_search(self, y_coordinate, x_coordinate, surface):
@@ -72,26 +75,29 @@ class MazeSolver:
 
     def add_to_stack_and_visualize(self, y_coordinate, x_coordinate, surface):
         self.__stack.append([y_coordinate, x_coordinate])
-        self.visualize_rectangle(y_coordinate, x_coordinate, surface, Path.YES, GREEN)
+        self.visualize_rectangle(y_coordinate, x_coordinate, surface, Path.YES, Constants.GREEN)
 
     def pop_off_stack_and_visualize(self, y_coordinate, x_coordinate, surface):
         self.__stack.pop()
-        self.visualize_rectangle(y_coordinate, x_coordinate, surface, Path.WAS, RED)
+        self.visualize_rectangle(y_coordinate, x_coordinate, surface, Path.WAS, Constants.RED)
 
     def visualize_rectangle(self, y_coordinate, x_coordinate, surface, path, colour):
         self.__maze[y_coordinate, x_coordinate].set_used(path)
-        y_0 = y_coordinate * self.__cell_size + PADDING
-        y_1 = (y_coordinate + 1) * self.__cell_size + PADDING
-        x_0 = x_coordinate * self.__cell_size + PADDING
-        x_1 = (x_coordinate + 1) * self.__cell_size + PADDING
+        y_0 = y_coordinate * self.__cell_size + Constants.PADDING
+        y_1 = (y_coordinate + 1) * self.__cell_size + Constants.PADDING
+        x_0 = x_coordinate * self.__cell_size + Constants.PADDING
+        x_1 = (x_coordinate + 1) * self.__cell_size + Constants.PADDING
         draw_rect(surface, colour, x_0, y_0, x_1, y_1, self.__cell_size)
+        if self.__animation:
+            time.sleep(0.05)
+            pygame.display.update()
 
     def get_stack(self):
         return self.__stack
 
+    # not used
     def recursive_backtracking(self, current_y, current_x, surface):
         self.add_to_stack_and_visualize(current_y, current_x, surface)
-        #print(len(self.__stack))
         # gets the current cell
         cell = self.__maze[current_y, current_x]
 
