@@ -1,4 +1,7 @@
 # Maze Generator and Maze Solver
+
+### Candidate no: 249
+
 ## Usage 
 For running this script, run the main.py file. 
 
