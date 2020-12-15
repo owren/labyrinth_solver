@@ -114,12 +114,18 @@ class UserInterface:
         self.__show_animation.set(True)
         self.__animation_check = tk.Checkbutton(root, variable=self.__show_animation, command=self.__show_animation_callback).grid(row=7, column=3)
 
-        # Start button for generating and solving maze 
+        # Start button for generating and solving maze
         tk.Label(root).grid(row=8, column=1)
         tk.Button(root, text="START", command=self.__start_game, bg='black', fg='white').grid(row=9, column=1, columnspan=3)
         tk.Label(root).grid(row=10, column=1)
 
+    # Callback methods for tkinter functions
+    # They run when sliding ok clicking different thinks in the user interface
+
     def __smaller_slider_callback(self):
+        """
+        If checked, the max vertical value is 50, or else 500
+        """
         if self.__smaller_slider.get():
             self.__vertical.configure(to=int(Constants.NO_OF_V_CELLS / 10))
             self.__horizontal.configure(to=int(self.__vertical.get() * 2))
@@ -128,24 +134,55 @@ class UserInterface:
             self.__horizontal.configure(to=int(self.__vertical.get() * 2))
 
     def __vertical_callback(self, value):
+        """
+        Used when sliding the vertical size slider
+        Sets the rows variable
+        Changes the max values of horizontal and y-coordinate
+        :param value: int - the new value for vertical size
+        """
         self.__rows = int(value)
         self.__horizontal.configure(to=int(value) * 2)
         self.__y_coordinate_start.configure(to=int(value) - 1)
 
     def __horizontal_callback(self, value):
+        """
+        Used when sliding the horizontal size slider
+        Sets the columns variable
+        Changes the max value of y-coordinate
+        :param value: int - the new value for horizontal size
+        """
         self.__columns = int(value)
         self.__x_coordinate_start.configure(to=int(value) - 1)
 
     def __y_coordinate_callback(self, value):
+        """
+        Used when sliding the y-coordinate start slider
+        Sets the new value
+        :param value: int - the new value for y-coordinate start position
+        """
         self.__y_coordinate = int(value)
 
     def __x_coordinate_callback(self, value):
+        """
+        Used when sliding the x-coordinate start slider
+        Sets the new value
+        :param value: int - the new value for x-coordinate start position
+        """
         self.__x_coordinate = int(value)
 
     def __show_animation_callback(self):
+        """
+        If checked, the generator and solver will be animated
+        """
         self.__animation = self.__show_animation.get()
 
     def __start_game(self):
+        """
+        Starts the maze generator and maze solver
+        First gets some values and generates a board
+        Second generates a maze from board
+        Third solves the maze
+        """
         cell_size = int(Constants.V_MAX / self.__rows)
         height = cell_size * self.__rows
         width = cell_size * self.__columns
