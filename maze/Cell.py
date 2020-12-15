@@ -8,6 +8,10 @@ from values.Path import Path
 
 
 class Cell:
+    """
+    Class for keeping track of the status of each a given cell on the board
+    Holds information about the walls and its coordinates and if it has been a part of the search
+    """
 
     def __init__(self, y_coordinate, x_coordinate):
         # The walls is if there is a wall in given direction or not
@@ -18,16 +22,14 @@ class Cell:
         # The coordinates are the coordinates for given Cell object
         self.y_coordinate = y_coordinate
         self.x_coordinate = x_coordinate
-        # Part of search? - 0 if not, 1 - if is, 2 - if was
+        # If it is a part of the search
         self.path = Path.NO
 
     def update_wall(self, direction, wall):
-        """Updates the wall for the Cell object in given direction, if there should be a wall there or not
-        ----------
-        Parameters:
-            self - object
-            direction - Enum, Direction Enum, to decide what direction the wall should be updated, e.g. Direction.NORTH
-            wall - boolean, True if there should be a wall, False if not wall
+        """
+        Updates the wall for the Cell object in given direction, if there should be a wall there or not
+        :param direction: Enum - Direction Enum, to decide what direction the wall should be updated, e.g. Direction.NORTH
+        :param wall: boolean - True if there should be a wall, False if not wall
         """
         if direction == Direction.NORTH:
             self.north_wall = wall
@@ -39,14 +41,10 @@ class Cell:
             self.east_wall = wall
 
     def get_wall(self, direction):
-        """Getter for walls
-        ----------
-        Parameters:
-            self - object
-            direction - Enum, Direction Enum, what wall we want to get from the Cell object
-        ----------
-        Return:
-            boolean, True if there is a wall, else False
+        """
+        Getter for walls
+        :param direction: Enum - Direction Enum, what wall we want to get from the Cell object
+        :return: boolean - True if there is a wall, else False
         """
         if direction == Direction.NORTH:
             return self.north_wall
@@ -58,9 +56,15 @@ class Cell:
             return self.east_wall
 
     def get_used(self):
+        """
+        Gets if the cell has been used or not 
+        :return: Path Enum - NO, YES or WAS 
+        """
         return self.path
 
     def set_used(self, path):
-        # path: Path-NO, Path.YES, Path.WAS
+        """
+        Sets if the cell has been used or not 
+        :param path: Enum - NO, YES or WAS 
+        """
         self.path = path
-

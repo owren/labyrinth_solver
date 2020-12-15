@@ -22,7 +22,3 @@ ROWS = 20
 COLUMNS = 30
 Y_START = 10
 X_START = 15
-
-
-WALL = '#'
-EMPTY = ' '
