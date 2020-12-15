@@ -4,8 +4,6 @@
 ################################################################################
 
 import random
-import os
-import time
 
 from values.Orientation import Orientation
 
@@ -17,17 +15,6 @@ def decide_orientation(width, height):
         return Orientation.VERTICAL
     else:
         return Orientation.HORIZONTAL if random.randint(0, 1) == 0 else Orientation.VERTICAL
-
-
-def clear_screen():
-    """
-    Clears the terminal screen for the game to be prettier
-    """
-    os.system('cls' if os.name == 'nt' else 'clear')
-
-
-def wait(x):
-    time.sleep(x)
 
 
 def random_even_number(minimum, maximum):

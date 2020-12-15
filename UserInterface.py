@@ -1,3 +1,8 @@
+################################################################################
+# Pål Anders Wangen Owren                                                      #
+# Student nummer: 333704                                                       #
+################################################################################
+
 import tkinter as tk
 import pygame
 from pygame.locals import KEYDOWN, K_q

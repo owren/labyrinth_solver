@@ -1,7 +1,13 @@
+################################################################################
+# Pål Anders Wangen Owren                                                      #
+# Student nummer: 333704                                                       #
+################################################################################
+
 import random
 import pygame
+import time
 
-from utils import functions, visualization
+from utils import utils, visualization
 from values import Constants
 from values.Direction import Direction
 from values.Orientation import Orientation
@@ -55,7 +61,7 @@ class MazeGenerator:
     def __recursive_divide(self, y, x):
         if y[1] - y[0] < 2 or x[1] - x[0] < 2:
             return
-        orientation = functions.decide_orientation(x[1] - x[0], y[1] - y[0])
+        orientation = utils.decide_orientation(x[1] - x[0], y[1] - y[0])
         if orientation == Orientation.VERTICAL:
             line = random.randint(x[0], x[1] - 2)
             self.__set_line(y, orientation, line)
@@ -83,4 +89,4 @@ class MazeGenerator:
             self.__board[coordinate + 1][opening].update_wall(Direction.NORTH, False)
         if self.__animation:
             visualization.draw_maze(self.__board, self.__cell_size, self.__surface)
-            functions.wait(0.05)
+            time.sleep(0.05)
