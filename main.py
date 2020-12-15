@@ -8,7 +8,7 @@ from utils.robust_IO import input_int
 from values import Constants
 import visualization
 from MazeSolver import MazeSolver
-from UserInterface import UserInterface as UI
+from UserInterface import UserInterface
 
 import pygame
 
@@ -25,7 +25,9 @@ def main():
     x_coordinate = int(columns / 2)
     y_coordinate = int(rows / 2)
     """
-    ui = UI()
+    ui = UserInterface()
+    ui.run_loop()
+
 
 
 if __name__ == "__main__":

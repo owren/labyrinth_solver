@@ -1,19 +1,10 @@
 import pygame
-import sys
-from pygame.locals import KEYDOWN, K_q
 
 from values.Direction import Direction
 from values.Constants import *
 
 
-def run_loop():
-    while True:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                sys.exit()
-            elif event.type == KEYDOWN and event.key == K_q:
-                pygame.quit()
-                sys.exit()
+
 
 
 def draw_maze(board, cell_size, surface):
