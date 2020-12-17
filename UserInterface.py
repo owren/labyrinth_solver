@@ -183,7 +183,7 @@ class UserInterface:
         cell_size = int(Constants.V_MAX / self.__rows)
         height = cell_size * self.__rows
         width = cell_size * self.__columns
-        board = Board(self.__rows, self.__columns, height, width, cell_size)
+        board = Board(self.__rows, self.__columns)
 
         generator = MazeGenerator(board.get_board(), height, width, cell_size, animation=self.__animation)
         surface = generator.generate()

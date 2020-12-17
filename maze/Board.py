@@ -11,10 +11,7 @@ class Board:
     Hols a np.ndarray object to create the maze on
     """
 
-    def __init__(self, vertical, horizontal, height, width, cell_size):
-        self.__board_height = height
-        self.__board_width = width
-        self.__cell_size = cell_size
+    def __init__(self, vertical, horizontal):
         self.__board = self.set_board(vertical, horizontal)
 
     @staticmethod
